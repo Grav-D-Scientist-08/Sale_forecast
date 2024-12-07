@@ -21,7 +21,7 @@ class DataIngestion:
 
     def save_data(self):
         try:
-            status = None
+            status = False
 
             data_file_path = os.path.join(self.config.data_dir,"advertising_data.csv")
             if not os.path.exists(data_file_path):
