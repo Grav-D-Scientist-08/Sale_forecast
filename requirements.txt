@@ -8,4 +8,5 @@ python-box
 ensure
 pyYAML
 Flask
+Path
 -e .
