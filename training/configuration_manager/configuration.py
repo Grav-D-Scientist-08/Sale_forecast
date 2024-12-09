@@ -36,13 +36,14 @@ class ConfigurationManager:
 #2    
     def get_data_validation_config(self) -> DataValidationConfig:
         config= self.config.data_validation
-        #schema = self.schema.COLUMNS - Not needed
+        schema = self.schema.COLUMNS
 
         create_directories([config.root_dir])
 
         data_validation_config = DataValidationConfig(
             root_dir= config.root_dir,
             data_dir= config.data_dir,
+            all_schema = schema,
             STATUS_FILE= config.STATUS_FILE
         )
 
@@ -55,8 +56,8 @@ class ConfigurationManager:
 
         feature_engineering_config = FeatureEngineeringConfig(
             root_dir = config.root_dir,
-            train_data_path=config.train_data_path,
-            test_data_path= config.test_data_path,
+            final_train_data_path=config.train_data_path,
+            final_test_data_path= config.test_data_path,
             STATUS_FILE=config.STATUS_FILE
         )
 
@@ -65,21 +66,16 @@ class ConfigurationManager:
     def get_cross_val_config(self) -> CrossValConfig:
         config = self.config.cross_val
         create_directories([config.root_dir])
-        create_directories([config.extracted_features, config.random_search_models_rf, config.model_cache_rf])
-        create_directories([config.train_data_path, config.test_data_path])
-        create_directories([config.metric_file_name_rf, config.best_model_params_rf])
+        create_directories([config.final_train_data_path, config.final_test_data_path])
+        create_directories([config.best_model_params])
 
         cross_val_config = CrossValConfig(
             root_dir = config.root_dir,
-            extracted_features= config.extracted_features,
-            random_search_models_rf= config.random_search_models_rf,
-            model_cache_rf= config.model_cache_rf,
-            train_data_path = config.train_data_path,
-            test_data_path= config.test_data_path,
-            model_name = config.model_name,
+            data_dir = config.data_dir,
+            final_train_data_path = config.final_train_data_path,
+            final_test_data_path= config.final_test_data_path,
             STATUS_FILE= config.STATUS_FILE,
-            metric_file_name_rf= config.metric_file_name_rf,
-            best_model_params_rf= config.best_model_params_rf
+            best_model_params= config.best_model_params
         )
 
         return cross_val_config
@@ -117,7 +113,7 @@ class ConfigurationManager:
           #  all_params=params,
             metric_file=config.metric_file,
             STATUS_FILE = config.STATUS_FILE
-            #target_column=schema.name,
+            #target_columrandom_search_models_rf= config.random_search_models_rf,n=schema.name,
            # mlflow_uri="https://dagshub.com/Parthsarthi-lab/Wine-quality-End-to-end-Project.mlflow"
         )
 
