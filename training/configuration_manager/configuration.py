@@ -87,11 +87,9 @@ class ConfigurationManager:
 
         model_trainer_config = ModelTrainerConfig(
             root_dir = config.root_dir,
-            train_data_path=config.train_data_path,
-            test_data_path=config.test_data_path,
-            metric_file_name_rf=config.metric_file_name_rf,
-            best_model_params_rf=config.best_model_params_rf,
-            final_model_name=config.final_model_name,
+            final_train_data_path=config.final_train_data_path,
+            final_test_data_path=config.final_test_data_path,
+            best_model_params=config.best_model_params,
             STATUS_FILE= config.STATUS_FILE
         )
 
@@ -101,20 +99,16 @@ class ConfigurationManager:
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
 
         config = self.config.model_evaluation
-        #params = self.params.ElasticNet
+        
 
         create_directories([config.root_dir])
-        create_directories([config.metric_file])
+        
 
         model_evaluation_config = ModelEvaluationConfig(
             root_dir=config.root_dir,
             test_data_path=config.test_data_path,
             model_path=config.model_path,
-          #  all_params=params,
-            metric_file=config.metric_file,
             STATUS_FILE = config.STATUS_FILE
-            #target_columrandom_search_models_rf= config.random_search_models_rf,n=schema.name,
-           # mlflow_uri="https://dagshub.com/Parthsarthi-lab/Wine-quality-End-to-end-Project.mlflow"
         )
 
         return model_evaluation_config
