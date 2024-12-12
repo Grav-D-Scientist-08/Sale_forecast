@@ -1,3 +1,0 @@
-Model Evaluation status: True 
-Model is not Good
-RMSE: 3.8026841777135263 High and R2: 0.5418643684883695 low
